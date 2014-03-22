@@ -1403,3 +1403,48 @@ ul.products li.product.grid.classic .product-actions {
 }
 }
 
+#sidebar-ltl-custom-pricing > div > h3 {
+    border-bottom: 0 none;
+    margin: 0;
+    padding: 0;
+}
+
+#sidebar-ltl-custom-pricing > div{
+    width: 260px;
+    padding: 5px;
+    height: 39px;
+}
+
+#sidebar-ltl-custom-pricing > div > select{
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    width: 220px;    
+}
+
+#sidebar-ltl-custom-pricing > div#text-8{
+    margin: 0;
+}
+
+#sidebar-ltl-custom-pricing > div#text-8 > .textwidget{
+    padding: 0;
+    height: 39px;
+    
+}
+#sidebar-ltl-custom-pricing #text-8 span{
+    color: #555555;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 0;
+    width: 260px;
+}
+
+#sidebar-ltl-custom-pricing > div #searchform{
+    padding: 0;
+    width: 260px;    
+    margin: 0;
+}
+
+#sidebar-ltl-custom-pricing > div #searchform > div{
+    padding: 0;
+}
