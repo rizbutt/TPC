@@ -93,6 +93,49 @@ jQuery(document).ready(function() {
     jQuery("#cart_or_container").prev("input").val("Container");
     jQuery("#cart_or_container").attr("readonly", "readonly");
   });
+  
+  jQuery('#sidebar-ltl-custom-pricing #product_categories-2 #dropdown_product_cat option:first-child').after('<option value="">All Categories</option>');
+  jQuery('#sidebar-ltl-custom-pricing #woocommerce_layered_nav-5 #dropdown_layered_nav_sub-category option:contains("Any Sub Category")').html('All Sub Categories');
+  jQuery('#sidebar-ltl-custom-pricing #price_filter-3 #dropdown_product_pri option:first-child').after('<option value="">All Prices</option>');
+  jQuery('#sidebar-ltl-custom-pricing #woocommerce_layered_nav-7 #dropdown_layered_nav_product-color option:contains("Any Color")').html('All Colors');
+  jQuery('#sidebar-ltl-custom-pricing #woocommerce_layered_nav-8 #dropdown_layered_nav_product-material option:contains("Any Material")').html('All Materials');
+  jQuery('#sidebar-ltl-custom-pricing #woocommerce_layered_nav-6 #dropdown_layered_nav_product-style option:contains("Any Style")').html('All Styles');
+  
+ /* 
+ var product_cat_dropdown = document.getElementById("dropdown_product_cat");
+ function onProductCatChange() {
+    if ( product_cat_dropdown.options[product_cat_dropdown.selectedIndex].value ==='' ) {
+        location.href = "/shop/";
+    }
+    else{
+        location.href = "/?product_cat="+product_cat_dropdown.options[product_cat_dropdown.selectedIndex].value;
+    }
+ }
+ product_cat_dropdown.onchange = onProductCatChange;   
+ 
+ 
+ jQuery('#dropdown_layered_nav_sub-category').change(function(){
+    if(jQuery('#') !== '' ){
+        location.href = "/?product_cat="+product_cat_dropdown.options[product_cat_dropdown.selectedIndex].value+'&filtering=1&filter_sub-category=' + jQuery('#dropdown_layered_nav_sub-category').val();
+    }
+    else{
+        location.href = "/?product_cat="+product_cat_dropdown.options[product_cat_dropdown.selectedIndex].value;
+    }
+    
+ }); 
+ 
+ var product_pri_dropdown = document.getElementById("dropdown_product_pri");
+ function onProductPriChange() {
+    if ( product_pri_dropdown.options[product_pri_dropdown.selectedIndex].value !=="" ) {
+        location.href = "/?product_cat="+product_cat_dropdown.options[product_cat_dropdown.selectedIndex].value+'&'+product_pri_dropdown.options[product_pri_dropdown.selectedIndex].value;
+    }
+    else{
+        
+    }
+ }
+ product_pri_dropdown.onchange = onProductPriChange; 
+ 
+ */
 });
 /* ]]> */
 </script>
