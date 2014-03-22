@@ -399,7 +399,7 @@ ul.colors li,ul.colors li.chosen {
 .widget.widget_layered_nav li a,.widget_product_categories .product-categories li a {
 	text-transform:none!important;
 }
-.widget.widget_layered_nav li a:,.widget_product_categories .product-categories li a:hover {
+.widget.widget_layered_nav li a,.widget_product_categories .product-categories li a:hover {
 	color:#70bb44;
 }
 div.yit-wcan-container>div>div>ul>li.product.group.grid>div.product-thumbnail.group>div.thumbnail-wrapper>a.thumb>img {
@@ -1390,7 +1390,6 @@ div.product .woocommerce-tabs, #content div.product .woocommerce-tabs {
 
 
 
-}
 @media (max-width:1200px) {
 ul.products li.product.grid.classic .product-shadow {
  
@@ -1403,3 +1402,4 @@ ul.products li.product.grid.classic .product-actions {
     display: none !important;
 }
 }
+
