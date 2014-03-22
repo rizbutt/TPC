@@ -1,0 +1,286 @@
+/*  
+Theme Name: TPC
+Theme URI: http://thepangaeacollection.com
+Version: 1.8.6
+Description: The Pangaea Collection
+Author: TPC
+Author URI: http://thepangaeacollection.com
+Template: cheope
+
+
+	Copyright: (c) 2013  The Pangaea Collection.
+	License: GNU General Public License v3.0
+	License URI: http://www.gnu.org/licenses/gpl-3.0.txt
+
+*/
+
+@import url("../cheope/style.css");
+
+/* Below you can write your style */
+
+a, li, address, dd, blockquote, td, th, .paragraph-links a, a.text-color, ul.filters li a, .menu-select select, .testimonial-widget li a, .testimonial-widget li p, #search_mini, .newsletter-input input, .newsletter-submit input, .features-tab-container .features-tab-labels li, .features-tab-content, i, em{
+    letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.sidebar-right .sidebar, .sidebar-left .sidebar {
+
+
+}
+
+.sidebar .widget:first-child, .sidebar .widget:first-child h3 {
+   padding: 5px;
+}
+.sidebar p, .sidebar li, .sidebar div {
+    padding: 5px;
+}
+p {
+     letter-spacing: 1px; 
+}
+.sidebar .widget:first-child, .sidebar .widget:first-child h3 {
+    padding: 0px;
+}
+
+.sidebar p, .sidebar li, .sidebar div {
+    padding: 0px;
+  padding-top: 10px;
+  padding-left: 8px;
+}
+.pangaea {
+font-size: 11px;
+letter-spacing: 0px;  
+  font-family: 'Julius Sans', Arial;
+}
+
+.gform_wrapper .gsection .gfield_label, .gform_wrapper h2.gsection_title, .gform_wrapper h3.gform_title {
+
+    font-weight: normal !important;
+}
+#search_mini {
+font-size: 10px !important;  
+}
+.gform_wrapper .top_label .gfield_label {
+
+    font-weight: normal !important;
+
+}
+
+.woocommerce.product-columns-5 ul.products li.product, .woocommerce-page.product-columns-5 ul.products li.product {
+    width: 21.6% !important;
+}
+#gform_wrapper_2 {
+border: 1px solid rgb(223, 219, 223);
+padding: 20px;
+margin: 2em 0px;
+border-radius: 5px;
+}
+#menu-top-menu > li:nth-child(4) {display: none;}
+#menu-top-menu > li:nth-child(4) > a { 
+display: none;}
+.sidebar .widget {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.widget.widget_layered_nav li, .widget_product_categories .product-categories li {
+    border-bottom: 1px solid #EAE9E9;
+    padding: 1px 0 !important;
+}
+.widget.widget_layered_nav li a, .widget_product_categories .product-categories li a {
+    text-transform: none !important;
+}
+.widget.widget_layered_nav li a:hover, .widget_product_categories .product-categories li a:hover {
+    color: #70BB44;
+}
+
+ul.colors li, ul.colors li.chosen { 
+    padding: 0px !important;
+}
+.widget.widget_layered_nav li, .widget_product_categories .product-categories li {
+    border-bottom: 1px solid #EAE9E9;
+    padding: 0px 0 !important;
+}
+.woocommerce.archive .sidebar .widget h3 {
+    border-bottom: 1px solid #E0DFDF;
+    padding-bottom: 1px;
+}
+#products > div > ul > li> div.product-thumbnail.group > div.thumbnail-wrapper > a.thumb > img, #products > ul > li > div.product-thumbnail.group > div.thumbnail-wrapper > a.thumb > img {
+max-height: 150px !important;
+width: auto;
+}
+#products > div > ul > li > div.product-thumbnail.group > div.thumbnail-wrapper > a.thumb, #products > ul > li > div.product-thumbnail.group > div.thumbnail-wrapper > a.thumb  {
+height: 150px;
+width: auto;
+}
+.widget.widget_layered_nav li small.count, .widget_product_categories .product-categories li span.count {
+    border: 0px solid #D9D3D3 !important;
+    color: #A6A6A6;
+    float: right;
+    padding: 0 5px;
+}
+div.yit-wcan-container > div > div > ul > li.product.group.grid > div.product-thumbnail.group > div.thumbnail-wrapper > a.thumb > img {
+height: 200px;
+}
+
+.widget.widget_layered_nav .colors li, .widget.widget_layered_nav .sizes li {
+    border: 0 none;
+    float: left;
+    padding: 0;
+   padding: 3px 6px 3px 0 !important;
+}
+#products > div > ul > li.product.group.grid > div.product-thumbnail.group > div.product-meta > span {
+font-size: 15px;
+}
+ul.products li.product.grid.classic .product-actions a.add_to_cart_button {
+display: none;
+}
+body.logged-in ul.products li.product.grid.classic .product-actions a.add_to_cart_button {
+display: inline-block;
+}
+.sidebar p, .sidebar li, .sidebar div {
+    padding: 0px 0 0 3px;
+}
+#price_filter-2 {
+display: none;
+}
+body.logged-in #price_filter-2 {
+display: block;
+}
+#sod_ajax_layered_nav-7 > nav > div > ul > li > label, #sod_ajax_layered_nav-6 > nav > div > ul > li:nth-child(2) > label, #sod_ajax_layered_nav-7 > nav > div > ul > li:nth-child(1), #sod_ajax_layered_nav-7 > nav > div > ul > li:nth-child(1), #sod_ajax_layered_nav-6 > nav > div > ul > li > label, #sod_ajax_layered_nav-6 > nav > div > ul > li:nth-child(1)   {
+display: none;
+}
+input[type="checkbox"] {
+position: relative;
+top: -34px;
+right: -114px;
+}
+#sod_ajax_layered_nav-7 > nav > div > ul > li:nth-child(2) {
+position: relative;
+right: -94px;
+}
+#sod_ajax_layered_nav-7 {
+position: relative;
+top: -25px;
+}
+.woocommerce-price-and-add .price-label {
+ font-family: 'Habibi',sans-serif !important;
+      font-size: 16px !important;
+}
+#searchform {
+margin: -28px 0 30px 0;
+position: relative;
+}
+.woocommerce.archive .sidebar .widget h3 {
+padding-bottom: 8px;
+border-bottom: 2px solid #E0DFDF !important;
+  font-weight: 700;
+}
+}
+
+
+#text-8 {
+margin-bottom: 10px;  
+}
+.woocommerce-price-and-add .price-label {
+ font-family: 'Habibi',sans-serif !important;
+  font-size: 14px !important;
+
+}
+div.product .woocommerce-price {
+max-width: 60% !important;
+}
+.woocommerce-price-and-add .amount, .single_variation .amount {
+    font-family: Muli;
+    font-size: 15px !important;
+}
+.woocommerce-price-and-add .price-label {
+float: none;
+}
+.summary .socials.product-share h2 {
+   display: none;
+  
+}
+
+div.summary.entry-summary > form > div.woocommerce-price-and-add.group > div:nth-child(4) > button {
+margin-top: 25px;  
+}
+
+.single-product .sidebar-right .span9 div.summary, .single-product .sidebar-left .span9 div.summary {
+ margin-bottom: 20px;
+}
+.list-or-grid {
+  display: none;
+}
+.woocommerce-ordering select {
+ margin-top: -20px;
+}
+ul.products li.product.grid .price {
+    color: #736D6D;
+    display: block;
+    font-size: 14px !important;
+    font-weight: normal;
+    margin-bottom: 0.5em;
+}
+.yith-wcwl-add-to-wishlist {
+    margin-top: 10px;
+   margin-bottom: 1.5em;
+}
+.yith-wcwl-share {
+ display: none;
+}
+
+#products > div > ul > li.product.group.grid > div.product-thumbnail.group > div.product-meta > span {
+    font-size: 14px;
+}
+
+ul.products li.product.grid.classic .product-actions {
+    margin-top: -15px !important;
+}
+.sidebar .widget {
+border-bottom: 0px;
+  }
+.feedback {
+margin-top: 5px;  
+}
+
+
+
+ul.products li.product.grid, ul.products li.product.list {
+    margin-left: 30px;
+  width: 21%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
