@@ -71,6 +71,7 @@ if (isset($_GET['added-to-cart']) || isset($_POST['added-to-cart']))
 /* <![CDATA[ */
 var urlParams;
 var query;
+var newQuery = '';
 (window.onpopstate = function () {
     var match,
         pl     = /\+/g,  // Regex for replacing addition symbol with a space
@@ -83,6 +84,47 @@ var query;
     while (match = search.exec(query))
        urlParams[decode(match[1])] = decode(match[2]);
 })();
+
+
+
+function getNewQuery(paramToExclude1, paramToExclude2){
+    paramToExclude2 = typeof paramToExclude2 !== 'undefined' ? paramToExclude2 : '';
+    var match,
+        pl     = /\+/g,  // Regex for replacing addition symbol with a space
+        search = /([^&=]+)=?([^&]*)/g,
+        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); };
+    
+    query  = window.location.search.substring(1);
+    newQuery = '';
+    while (match = search.exec(query)){
+        if( paramToExclude1 !== '' && paramToExclude2 !== ''){
+            if( decode(match[1]) !== paramToExclude1 && decode(match[1]) !== paramToExclude2 ){
+                if( newQuery == ''){
+                    newQuery = decode(match[1]) + '=' + decode(match[2]);  
+                }
+                else{
+                    newQuery = newQuery + '&' + decode(match[1]) + '=' + decode(match[2]);  
+                }
+
+            }               
+        }
+        else if( paramToExclude1 !== '' ){
+            if( decode(match[1]) !== paramToExclude1 ){
+                if( newQuery == ''){
+                    newQuery = decode(match[1]) + '=' + decode(match[2]);  
+                }
+                else{
+                    newQuery = newQuery + '&' + decode(match[1]) + '=' + decode(match[2]);  
+                }
+
+            }             
+        }
+        
+        
+    
+    }
+       
+}
 
 jQuery(document).ready(function() {
   jQuery(".cb-enable-container").on("click touchstart", function() {
@@ -119,38 +161,54 @@ jQuery(document).ready(function() {
 
 
 
- var product_cat_dropdown = document.getElementById("dropdown_product_cat");
- function onProductCatChange() {
-    if ( product_cat_dropdown.options[product_cat_dropdown.selectedIndex].value ==='' ) {
+ 
+ jQuery('#dropdown_product_cat').change(function(){
+    if ( jQuery('#dropdown_product_cat').val()  === '' ) {
         location.href = '/shop/'+'?'+query;
     }
     else{
-        location.href = '/?product_cat='+product_cat_dropdown.options[product_cat_dropdown.selectedIndex].value+'&'+query;
+        location.href = '/?product_cat='+jQuery('#dropdown_product_cat').val()+'&'+query;
     }
- }
- product_cat_dropdown.onchange = onProductCatChange;   
+ }); 
+ 
  
  
  jQuery('#dropdown_layered_nav_sub-category').change(function(){
-    if(jQuery('#') !== '' ){
-        location.href = '/?product_cat='+product_cat_dropdown.options[product_cat_dropdown.selectedIndex].value+'&filtering=1&filter_sub-category=' + jQuery('#dropdown_layered_nav_sub-category').val()+'&'+query;
+    if( jQuery('#dropdown_layered_nav_sub-category').val()  !== '' ){
+        location.href = '/?product_cat='+jQuery('#dropdown_product_cat').val()+'&filtering=1&filter_sub-category=' + jQuery('#dropdown_layered_nav_sub-category').val()+'&'+query;
     }
     else{
-        location.href = '/?product_cat='+product_cat_dropdown.options[product_cat_dropdown.selectedIndex].value+'&'+query;
+        location.href = '/?product_cat='+jQuery('#dropdown_product_cat').val()+'&'+query;
     }
     
  }); 
  
- var product_pri_dropdown = document.getElementById("dropdown_product_pri");
- function onProductPriChange() {
-    if ( product_pri_dropdown.options[product_pri_dropdown.selectedIndex].value !=="" ) {
-        location.href = "/?product_cat="+product_cat_dropdown.options[product_cat_dropdown.selectedIndex].value+'&'+product_pri_dropdown.options[product_pri_dropdown.selectedIndex].value;
+ 
+ jQuery('#dropdown_product_pri').change(function(){
+    getNewQuery('min_price','max_price');
+    
+    
+    if ( jQuery('#dropdown_product_pri').val() !== "" ) {
+        location.href = '?'+jQuery('#dropdown_product_pri').val()+'&'+newQuery;
     }
     else{
-        
+        location.href = '?'+newQuery;
     }
- }
- product_pri_dropdown.onchange = onProductPriChange; 
+ }); 
+ 
+ 
+
+ jQuery('#dropdown_layered_nav_product-color').change(function(){
+     getNewQuery('filter_product-color');
+     if( jQuery('#dropdown_layered_nav_product-color').val() !== '' ){
+         location.href = '?filter_product-color=' + jQuery('#dropdown_layered_nav_product-color').val()+'&'+newQuery;
+     }
+     else{
+         location.href = '?'+newQuery;
+     }
+    
+ }); 
+ 
  
  
 });
