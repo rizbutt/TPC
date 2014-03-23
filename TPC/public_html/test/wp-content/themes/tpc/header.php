@@ -158,8 +158,24 @@ jQuery(document).ready(function() {
   jQuery('#sidebar-ltl-custom-pricing #woocommerce_layered_nav-8 #dropdown_layered_nav_product-material option:contains("Any Material")').html('All Materials');
   jQuery('#sidebar-ltl-custom-pricing #woocommerce_layered_nav-6 #dropdown_layered_nav_product-style option:contains("Any Style")').html('All Styles');
   
+  //put $ signs
+  jQuery('#sidebar-ltl-custom-pricing #price_filter-3 #dropdown_product_pri option:contains("0-250")').html('$0 - $250');
+  jQuery('#sidebar-ltl-custom-pricing #price_filter-3 #dropdown_product_pri option:contains("250-500")').html('$250 - $500');
+  jQuery('#sidebar-ltl-custom-pricing #price_filter-3 #dropdown_product_pri option:contains("500-750")').html('$500 - $750');
+  jQuery('#sidebar-ltl-custom-pricing #price_filter-3 #dropdown_product_pri option:contains("750-1000")').html('$750 - $1000');
+  jQuery('#sidebar-ltl-custom-pricing #price_filter-3 #dropdown_product_pri option:contains("1000+")').html('$1000+');
+  
+  
 
-
+  jQuery('#sidebar-ltl-custom-pricing #woocommerce_layered_nav-7 #dropdown_layered_nav_product-color').prepend('<option value="">Select a color</option>');
+  jQuery('#sidebar-ltl-custom-pricing #woocommerce_layered_nav-8 #dropdown_layered_nav_product-material').prepend('<option value="">Select a material</option>');
+  jQuery('#sidebar-ltl-custom-pricing #woocommerce_layered_nav-6 #dropdown_layered_nav_product-style').prepend('<option value="">Select a style</option>');
+    
+  if(query === ''){
+    jQuery('#sidebar-ltl-custom-pricing #woocommerce_layered_nav-7 #dropdown_layered_nav_product-color option:contains("Select a color")').attr('selected', 'selected');
+    jQuery('#sidebar-ltl-custom-pricing #woocommerce_layered_nav-8 #dropdown_layered_nav_product-material option:contains("Select a material")').attr('selected', 'selected');
+    jQuery('#sidebar-ltl-custom-pricing #woocommerce_layered_nav-6 #dropdown_layered_nav_product-style option:contains("Select a style")').attr('selected', 'selected');
+  }
 
  
  jQuery('#dropdown_product_cat').change(function(){
