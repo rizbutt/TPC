@@ -1448,3 +1448,21 @@ ul.products li.product.grid.classic .product-actions {
 #sidebar-ltl-custom-pricing > div #searchform > div{
     padding: 0;
 }
+
+#sidebar-ltl-custom-pricing #text-9{
+    overflow: auto;
+}
+
+#sidebar-ltl-custom-pricing #text-9 .textwidget{
+    padding: 0;
+}
+
+#sidebar-ltl-custom-pricing #text-9 .textwidget a#returnButton{
+    color: #555555;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 4px 6px;
+    width: 207px;
+    text-transform: none;
+}

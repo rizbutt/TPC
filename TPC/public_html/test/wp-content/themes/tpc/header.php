@@ -225,7 +225,13 @@ jQuery(document).ready(function() {
     
  }); 
  
+ //hide add to cart for the related products on the add product page
+ jQuery('.related .products .product .product-actions form').hide();
  
+ //add a Return to All Products button on the Individual Page  
+ if( jQuery('#content-shop div[id^="product-"]').length > 0 ){
+     jQuery('#content-shop #page-meta .product-title').append('<a class="btn btn-mini pull-right" href="/shop" style="text-transform: none; font-size: 10px; padding: 3px 15px;">Return to All Products</a>');
+ }
  
 });
 
