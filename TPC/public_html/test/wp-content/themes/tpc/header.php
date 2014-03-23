@@ -69,6 +69,21 @@ if (isset($_GET['added-to-cart']) || isset($_POST['added-to-cart']))
     </style>
  <script type="text/javascript">
 /* <![CDATA[ */
+var urlParams;
+var query;
+(window.onpopstate = function () {
+    var match,
+        pl     = /\+/g,  // Regex for replacing addition symbol with a space
+        search = /([^&=]+)=?([^&]*)/g,
+        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); };
+    
+    query  = window.location.search.substring(1);
+
+    urlParams = {};
+    while (match = search.exec(query))
+       urlParams[decode(match[1])] = decode(match[2]);
+})();
+
 jQuery(document).ready(function() {
   jQuery(".cb-enable-container").on("click touchstart", function() {
     jQuery("#radio-container").prop("checked", !0);
@@ -101,14 +116,16 @@ jQuery(document).ready(function() {
   jQuery('#sidebar-ltl-custom-pricing #woocommerce_layered_nav-8 #dropdown_layered_nav_product-material option:contains("Any Material")').html('All Materials');
   jQuery('#sidebar-ltl-custom-pricing #woocommerce_layered_nav-6 #dropdown_layered_nav_product-style option:contains("Any Style")').html('All Styles');
   
- /* 
+
+
+
  var product_cat_dropdown = document.getElementById("dropdown_product_cat");
  function onProductCatChange() {
     if ( product_cat_dropdown.options[product_cat_dropdown.selectedIndex].value ==='' ) {
-        location.href = "/shop/";
+        location.href = '/shop/'+'?'+query;
     }
     else{
-        location.href = "/?product_cat="+product_cat_dropdown.options[product_cat_dropdown.selectedIndex].value;
+        location.href = '/?product_cat='+product_cat_dropdown.options[product_cat_dropdown.selectedIndex].value+'&'+query;
     }
  }
  product_cat_dropdown.onchange = onProductCatChange;   
@@ -116,10 +133,10 @@ jQuery(document).ready(function() {
  
  jQuery('#dropdown_layered_nav_sub-category').change(function(){
     if(jQuery('#') !== '' ){
-        location.href = "/?product_cat="+product_cat_dropdown.options[product_cat_dropdown.selectedIndex].value+'&filtering=1&filter_sub-category=' + jQuery('#dropdown_layered_nav_sub-category').val();
+        location.href = '/?product_cat='+product_cat_dropdown.options[product_cat_dropdown.selectedIndex].value+'&filtering=1&filter_sub-category=' + jQuery('#dropdown_layered_nav_sub-category').val()+'&'+query;
     }
     else{
-        location.href = "/?product_cat="+product_cat_dropdown.options[product_cat_dropdown.selectedIndex].value;
+        location.href = '/?product_cat='+product_cat_dropdown.options[product_cat_dropdown.selectedIndex].value+'&'+query;
     }
     
  }); 
@@ -135,8 +152,10 @@ jQuery(document).ready(function() {
  }
  product_pri_dropdown.onchange = onProductPriChange; 
  
- */
+ 
 });
+
+
 /* ]]> */
 </script>
 </head>
