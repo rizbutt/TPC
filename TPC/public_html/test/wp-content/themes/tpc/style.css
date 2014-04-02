@@ -228,10 +228,11 @@ body.logged-in #woocommerce_random_products-2>ul>li>span {
 	-webkit-transform:scale(7,7);
 }
 #formbb {
-	padding:5px;
-	margin-left:0px;
-	float:right;
-	width:150px;
+        padding: 5px;
+        margin-left: 0px;
+        float: right;
+        width: 150px;
+        height: 19px !important;
 }
 #products>ul>li>div.product-thumbnail.group>div.product-meta>span.price.unit.container {
 	display: block;
@@ -244,7 +245,7 @@ body.logged-in #woocommerce_random_products-2>ul>li>span {
 #question-cart>div.button-cartcontainer {
 	bottom:5%;
 	position:absolute;
-	right:3%;
+	right:35%;
 	text-align:center;
 	width:100%;
 }
@@ -1465,4 +1466,20 @@ ul.products li.product.grid.classic .product-actions {
     padding: 4px 6px;
     width: 207px;
     text-transform: none;
+}
+#eModal-2 .title{
+    font-size: 18px !important;
+    color: rgb(92, 92, 92) !important;
+    font-weight: bold !important;
+    font-family: 'Habibi',Arial,Helvetica,sans-serif !important;
+    margin: 20px auto 10px !important;
+    text-align: center !important;    
+}
+
+#eModal-2 #question-cart{
+    margin-top: 45px !important;
+}
+
+#eModal-2 .button-cartcontainer{
+    
 }

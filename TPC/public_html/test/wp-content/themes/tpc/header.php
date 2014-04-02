@@ -142,9 +142,15 @@ jQuery(document).ready(function() {
     jQuery(this).addClass("selected");
   });
   jQuery("#zimbo").on("click touchstart", function() {
-    var a = jQuery("#radio-cart").prop("checked"), b = jQuery("#radio-container").prop("checked"), c = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    var a = jQuery("#radio-cart").prop("checked");
+    var b = jQuery("#radio-container").prop("checked");
+    var c = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     a && (jQuery.cookie("cart_or_container", "cart", {path:"/", expires:3}), location.reload(!0));
-    b && jQuery.cookie("cart_or_container", "container", {path:"/", expires:3}) && (jQuery.cookie("container_expirations", c, {path:"/", expires:3}), location.reload(!0));
+    if( b ){
+        jQuery.cookie("cart_or_container", "container", {path:"/", expires:3});
+        jQuery.cookie("container_expirations", c, {path:"/", expires:3});
+        location.reload(!0);
+    };
   });
   jQuery(window).bind("load", function() {
     jQuery("#cart_or_container").prev("input").val("Container");
