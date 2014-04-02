@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $woocommerce;
 
 $temp_cookie = isset($_COOKIE['cart_or_container']);
+$c_cart_Cont = 'Container or Cart';
  if (($temp_cookie) && ($temp_cookie == "container")) 
  {
  $c_cart_Cont = "Container";

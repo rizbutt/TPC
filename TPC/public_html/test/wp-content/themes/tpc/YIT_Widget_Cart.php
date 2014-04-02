@@ -47,12 +47,20 @@ class YIT_Widget_Cart extends WP_Widget {
 	 */
 	function widget( $args, $instance ) {
 		global $woocommerce, $yit_is_header;
-
+                $temp_cookie = isset($_COOKIE['cart_or_container']);
+                $cartcontainerstring = 'Container or Cart';
+                if (($temp_cookie) && ($temp_cookie == "container")){        
+                    $cartcontainerstring = 'Container';
+                }
+                else if (($temp_cookie) && ($temp_cookie == "cart")){  
+                    $cartcontainerstring = 'Cart';
+                }
+                
 		extract( $args );
 
 		//if ( is_cart() || is_checkout() ) return;
 
-		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('Container', 'woocommerce') : $instance['title'], $instance, $this->id_base );
+		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __($cartcontainerstring, 'woocommerce') : $instance['title'], $instance, $this->id_base );
 		$hide_if_empty = empty( $instance['hide_if_empty'] )  ? 0 : 1;
 
 		echo $before_widget;
@@ -67,16 +75,16 @@ class YIT_Widget_Cart extends WP_Widget {
 		
 		if($yit_is_header) :
 			if ( sizeof( $woocommerce->cart->get_cart() ) > 0 ) : ?>
-			<a href="<?php echo $woocommerce->cart->get_cart_url(); ?>" class="cart_control"><?php _e('View Container', 'yit') ?></a>
+			<a href="<?php echo $woocommerce->cart->get_cart_url(); ?>" class="cart_control"><?php _e('View '.$cartcontainerstring, 'yit') ?></a>
 			<?php else: ?>
-			<a href="<?php echo $woocommerce->cart->get_cart_url(); ?>" class="cart_control cart_control_empty"><?php _e('Empty Container', 'yit') ?></a>
+			<a href="<?php echo $woocommerce->cart->get_cart_url(); ?>" class="cart_control cart_control_empty"><?php _e('Empty '.$cartcontainerstring, 'yit') ?></a>
 			<?php endif ?>
 		<div class="cart_wrapper">
 		<?php endif;
 		
         echo '<div class="widget_shopping_cart_content ' . ( $hide_if_empty ? 'hide_cart_widget_if_empty' : '' ) . '">
 		                    <ul class="cart_list product_list_widget">
-                        <li class="empty">' . __( 'No products in the container.', 'yit' ) . '</li>
+                        <li class="empty">' . __( 'No products in the '.$cartcontainerstring .'.', 'yit' ) . '</li>
                     </ul>
 		</div>';
 		
@@ -150,7 +158,7 @@ class YIT_Widget_Cart extends WP_Widget {
 		<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id('title') ); ?>" name="<?php echo esc_attr( $this->get_field_name('title') ); ?>" value="<?php if (isset ( $instance['title'])) {echo esc_attr( $instance['title'] );} ?>" /></p>
 
 		<p><input type="checkbox" class="checkbox" id="<?php echo esc_attr( $this->get_field_id('hide_if_empty') ); ?>" name="<?php echo esc_attr( $this->get_field_name('hide_if_empty') ); ?>"<?php checked( $hide_if_empty ); ?> />
-		<label for="<?php echo $this->get_field_id('hide_if_empty'); ?>"><?php _e( 'Hide if container is empty', 'woocommerce' ); ?></label></p>
+		<label for="<?php echo $this->get_field_id('hide_if_empty'); ?>"><?php _e( 'Hide if '.$cartcontainerstring.' is empty', 'woocommerce' ); ?></label></p>
 		<?php
 	}
 

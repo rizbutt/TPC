@@ -232,6 +232,9 @@ jQuery(document).ready(function() {
  if( jQuery('#content-shop div[id^="product-"]').length > 0 ){
      jQuery('#content-shop #page-meta .product-title').append('<a class="btn btn-mini pull-right" href="/shop" style="text-transform: none; font-size: 10px; padding: 3px 15px;">Return to All Products</a>');
  }
+     
+ 
+
  
 });
 
@@ -242,7 +245,6 @@ jQuery(document).ready(function() {
 <!-- END HEAD -->
 <!-- START BODY -->
 <body <?php body_class( $body_classes ) ?>>
-    
     <!-- START BG SHADOW -->
     <div class="bg-shadow">
     

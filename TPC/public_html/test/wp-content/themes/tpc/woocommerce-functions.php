@@ -476,6 +476,14 @@ function woocommerce_add_to_cart_action( $url = false ) {
  */
 function woocommerce_add_to_cart_message( $product_id ) {
 	global $woocommerce;
+        $temp_cookie = isset($_COOKIE['cart_or_container']);
+        $cartcontainerstring = 'container or cart';
+        if (($temp_cookie) && ($temp_cookie == "container")){        
+            $cartcontainerstring = 'container';
+        }
+        else if (($temp_cookie) && ($temp_cookie == "cart")){  
+            $cartcontainerstring = 'cart';
+        }
 
 	if ( is_array( $product_id ) ) {
 
@@ -488,7 +496,7 @@ function woocommerce_add_to_cart_message( $product_id ) {
 		$added_text = sprintf( __( 'Added &quot;%s&quot; to your cart.', 'woocommerce' ), join( __( '&quot; and &quot;', 'woocommerce' ), array_filter( array_merge( array( join( '&quot;, &quot;', array_slice( $titles, 0, -1 ) ) ), array_slice( $titles, -1 ) ) ) ) );
 
 	} else {
-		$added_text = sprintf( __( '&quot;%s&quot; was successfully added to your cart.', 'woocommerce' ), get_the_title( $product_id ) );
+		$added_text = sprintf( __( '&quot;%s&quot; was successfully added to your '.$cartcontainerstring.'.', 'woocommerce' ), get_the_title( $product_id ) );
 	}
 
 	// Output success messages
@@ -500,7 +508,7 @@ function woocommerce_add_to_cart_message( $product_id ) {
 
 	else :
 
-		$message 	= sprintf('<a href="%s" class="button">%s</a> %s', get_permalink( woocommerce_get_page_id( 'cart' ) ), __( 'View Cart &rarr;', 'woocommerce' ), $added_text );
+		$message 	= sprintf('<a href="%s" class="button">%s</a> %s', get_permalink( woocommerce_get_page_id( 'cart' ) ), __( 'View '.ucwords($cartcontainerstring).' &rarr;', 'woocommerce' ), $added_text );
 
 	endif;
 
