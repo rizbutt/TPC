@@ -9,10 +9,12 @@
 
 global $product;
 
+
 	
-        $temp_cookie = isset($_COOKIE['cart_or_container']);
+        $temp_cookie = ($_COOKIE['cart_or_container']);
+
         $cartcontainerstring = 'container or cart';
-        if (($temp_cookie) && ($temp_cookie == "container")){        
+        if (isset($temp_cookie) && ($temp_cookie == "container")){        
             $cartcontainerstring = 'container';
         }
         else{  

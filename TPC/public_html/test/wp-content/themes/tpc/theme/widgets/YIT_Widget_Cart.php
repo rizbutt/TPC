@@ -47,12 +47,12 @@ class YIT_Widget_Cart extends WP_Widget {
 	 */
 	function widget( $args, $instance ) {
 		global $woocommerce, $yit_is_header;
-                $temp_cookie = isset($_COOKIE['cart_or_container']);
+                $temp_cookie = ($_COOKIE['cart_or_container']);
                 $cartcontainerstring = 'Container or Cart';
-                if (($temp_cookie) && ($temp_cookie == "container")){        
+                if (isset($temp_cookie) && ($temp_cookie == "container")){        
                     $cartcontainerstring = 'Container';
                 }
-                else{  
+                elseif (isset($temp_cookie) && ($temp_cookie == "cart")){        
                     $cartcontainerstring = 'Cart';
                 }
                 

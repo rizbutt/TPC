@@ -29,14 +29,14 @@ $out_of_stock = '';
                  if (($temp_cookie === "container") &&  current_user_can( 'see_container_price' ))
                  {
 										$link 	= apply_filters( 'add_to_cart_url', esc_url( $product->add_to_cart_url() ) );
-										$label 	= 'Add too Container';
+										$label 	= 'Add to Container 123';
 										$quantity = apply_filters( 'add_to_cart_quantity', ( get_post_meta( $product->id, 'minimum_allowed_quantity', true ) ? get_post_meta( $product->id, 'minimum_allowed_quantity', true ) : 1 ) );
 										$add_to_cart = '<form action="' . esc_url( $product->add_to_cart_url() ) .'" class="cart" method="post" enctype="multipart/form-data"><div class="woocommerce-add-to-cart container"><button type="submit" class="single_add_to_cart_button button alt container">Add to Container</button></div>';
                 } 
                 elseif (($temp_cookie === "cart") &&  current_user_can( 'see_container_price' ) )
                 {
 										$link 	= apply_filters( 'add_to_cart_url', esc_url( $product->add_to_cart_url() ) );
-										$label 	= 'Add to Cart';
+										$label 	= 'Add to Cart 123';
 										$quantity = apply_filters( 'add_to_cart_quantity', ( get_post_meta( $product->id, 'minimum_allowed_quantity', true ) ? get_post_meta( $product->id, 'minimum_allowed_quantity', true ) : 1 ) );
 										$add_to_cart = '<form action="' . esc_url( $product->add_to_cart_url() ) .'" class="cart" method="post" enctype="multipart/form-data"><div class="woocommerce-add-to-cart cart"><button type="submit" class="single_add_to_cart_button button alt container">Add to Cart</button></div>';
                  } 

@@ -234,6 +234,56 @@ jQuery(document).ready(function() {
  }
      
  
+ <?php
+ /*
+    $temp_cookie = ($_COOKIE['cart_or_container']);
+    echo '$temp_cookie is '.$temp_cookie;
+        $cartcontainerstring = 'container or cart';
+        if (isset($temp_cookie) && ($temp_cookie == "container")){        
+            $cartcontainerstring = 'container';
+?>
+            var m = setInterval(function ()
+           {
+               if ( jQuery('a:contains("View Cart")').length )
+               {
+                   clearInterval(m);
+                   jQuery('a:contains("View Cart")').html('View <?php echo ucwords($cartcontainerstring); ?>  &rarr;');
+               }
+           }, 100);
+           
+            var n = setInterval(function ()
+           {
+               if ( jQuery('.woocommerce-message:contains("Cart updated.")').length )
+               {
+                   clearInterval(n);
+                   jQuery('.woocommerce-message:contains("Cart updated.")').html('<?php echo ucwords($cartcontainerstring); ?> updated.');
+               }
+           }, 100);           
+<?php        
+        }
+        elseif (isset($temp_cookie) && ($temp_cookie == "cart")){        
+            $cartcontainerstring = 'cart';
+?>
+            var m = setInterval(function ()
+           {
+               if ( jQuery('a:contains("View Container")').length )
+               {
+                   clearInterval(m);
+                   jQuery('a:contains("View Container")').html('View <?php echo ucwords($cartcontainerstring); ?>  &rarr;');
+               }
+           }, 100);   
+           
+            var n = setInterval(function ()
+           {
+               if ( jQuery('.woocommerce-message:contains("Container updated.")').length )
+               {
+                   clearInterval(n);
+                   jQuery('.woocommerce-message:contains("Container updated.")').html('<?php echo ucwords($cartcontainerstring); ?> updated.');
+               }
+           }, 100);                     
+<?php                    
+        }*/
+ ?>
 
  
 });

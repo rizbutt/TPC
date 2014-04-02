@@ -51,7 +51,7 @@ class YIT_Widget_Cart extends WP_Widget {
 				
 				$c_or_c = "Container";
 				
-		}else{
+		}elseif ((isset($_COOKIE['cart_or_container'])) && ($_COOKIE['cart_or_container'] == "cart")){
 				
 				$c_or_c = "Cart";
 				
