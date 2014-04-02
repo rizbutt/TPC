@@ -450,7 +450,7 @@ $perc_cont = ($meter3_all_quantity / 65) * 100;
 $prefix_ct = "Cart";
 }
 ?>            
-		<h2><?php echo "Container Stats & Totals" ?></h2>
+		<h2><?php echo $prefix_ct." Stats & Totals" ?></h2>
 		<table align="right" cellspacing="0" cellpadding="0">
 			<tbody>	
 			

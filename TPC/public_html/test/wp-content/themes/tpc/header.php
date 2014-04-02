@@ -245,6 +245,7 @@ jQuery(document).ready(function() {
 <!-- END HEAD -->
 <!-- START BODY -->
 <body <?php body_class( $body_classes ) ?>>
+    
     <!-- START BG SHADOW -->
     <div class="bg-shadow">
     

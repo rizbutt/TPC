@@ -52,7 +52,7 @@ class YIT_Widget_Cart extends WP_Widget {
                 if (($temp_cookie) && ($temp_cookie == "container")){        
                     $cartcontainerstring = 'Container';
                 }
-                else if (($temp_cookie) && ($temp_cookie == "cart")){  
+                else{  
                     $cartcontainerstring = 'Cart';
                 }
                 

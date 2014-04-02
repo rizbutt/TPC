@@ -481,7 +481,7 @@ function woocommerce_add_to_cart_message( $product_id ) {
         if (($temp_cookie) && ($temp_cookie == "container")){        
             $cartcontainerstring = 'container';
         }
-        else if (($temp_cookie) && ($temp_cookie == "cart")){  
+        else{  
             $cartcontainerstring = 'cart';
         }
 

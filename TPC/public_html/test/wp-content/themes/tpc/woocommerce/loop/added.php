@@ -15,7 +15,7 @@ global $product;
         if (($temp_cookie) && ($temp_cookie == "container")){        
             $cartcontainerstring = 'container';
         }
-        else if (($temp_cookie) && ($temp_cookie == "cart")){  
+        else{  
             $cartcontainerstring = 'cart';
         }
 ?>
