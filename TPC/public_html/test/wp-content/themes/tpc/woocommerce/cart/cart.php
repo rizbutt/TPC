@@ -174,7 +174,7 @@ $text_c = "Update Cart";
 											<td class="product-subtotal timediff">
 						<span class="ccinventory">
 					<?php 
-							if ($array_expirations['full'] === 1)
+							if ($array_expirations['full'] === 1 && isset($array_expirations[$_product->id]) )
 							{
 									$date_db = date_create_from_format('Y-m-d H:i:s', $array_expirations[$_product->id]);
 									$today_dt = new DateTime();
