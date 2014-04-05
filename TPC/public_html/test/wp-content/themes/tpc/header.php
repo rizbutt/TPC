@@ -152,6 +152,7 @@ jQuery(document).ready(function() {
         location.reload(!0);
     };
   });
+  
   jQuery(window).bind("load", function() {
     jQuery("#cart_or_container").prev("input").val("Container");
     jQuery("#cart_or_container").attr("readonly", "readonly");
@@ -239,11 +240,23 @@ jQuery(document).ready(function() {
      jQuery('#content-shop #page-meta .product-title').append('<a class="btn btn-mini pull-right" href="/shop" style="text-transform: none; font-size: 10px; padding: 3px 15px;">Return to All Products</a>');
  }
      
+ if( jQuery('.row .summary .cart .woocommerce-price-and-add .yith-wcwl-add-to-wishlist').length > 0 ){
+     jQuery('.cart .woocommerce-price-and-add .yith-wcwl-add-to-wishlist').hide();
+ }
+ 
+ if( jQuery('a[href="http://test.thepangaeacollection.com/wishlist/"]').length > 0 ){
+     jQuery('a[href="http://test.thepangaeacollection.com/wishlist/"]').hide();
+ }
+ /*
+ if( jQuery('a[href="http://test.thepangaeacollection.com/cart/"]').html() == 'View Cart →') {
+     jQuery('a[href="http://test.thepangaeacollection.com/cart/"]').html('View Container →');
+ }
+ */
  
  <?php
- /*
+ 
     $temp_cookie = ($_COOKIE['cart_or_container']);
-    echo '$temp_cookie is '.$temp_cookie;
+    //echo '$temp_cookie is '.$temp_cookie;
         $cartcontainerstring = 'container or cart';
         if (isset($temp_cookie) && ($temp_cookie == "container")){        
             $cartcontainerstring = 'container';
@@ -255,7 +268,7 @@ jQuery(document).ready(function() {
                    clearInterval(m);
                    jQuery('a:contains("View Cart")').html('View <?php echo ucwords($cartcontainerstring); ?>  &rarr;');
                }
-           }, 100);
+           }, 25);
            
             var n = setInterval(function ()
            {
@@ -264,10 +277,10 @@ jQuery(document).ready(function() {
                    clearInterval(n);
                    jQuery('.woocommerce-message:contains("Cart updated.")').html('<?php echo ucwords($cartcontainerstring); ?> updated.');
                }
-           }, 100);           
+           }, 25);           
 <?php        
         }
-        elseif (isset($temp_cookie) && ($temp_cookie == "cart")){        
+        else{        
             $cartcontainerstring = 'cart';
 ?>
             var m = setInterval(function ()
@@ -277,7 +290,7 @@ jQuery(document).ready(function() {
                    clearInterval(m);
                    jQuery('a:contains("View Container")').html('View <?php echo ucwords($cartcontainerstring); ?>  &rarr;');
                }
-           }, 100);   
+           }, 25);   
            
             var n = setInterval(function ()
            {
@@ -286,9 +299,18 @@ jQuery(document).ready(function() {
                    clearInterval(n);
                    jQuery('.woocommerce-message:contains("Container updated.")').html('<?php echo ucwords($cartcontainerstring); ?> updated.');
                }
-           }, 100);                     
+           }, 25);    
+           
+            var o = setInterval(function ()
+           {
+               if ( jQuery('.woocommerce-price-and-add button.single_add_to_cart_button:contains("Add to Container")').length )
+               {
+                   clearInterval(o);
+                   jQuery('.woocommerce-price-and-add button.single_add_to_cart_button:contains("Add to Container")').html('Add to <?php echo ucwords($cartcontainerstring); ?>.');
+               }
+           }, 25);               
 <?php                    
-        }*/
+        } 
  ?>
 
  
