@@ -253,11 +253,21 @@ jQuery(document).ready(function() {
  }
  */
  
+          
+         
+
+                //add link on menu
+        if( jQuery('#cartOrContainerMenuItem').length <= 0 ){
+            jQuery('#menu-item-205 #menu-item-123').after('<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-children-0"><a id="cartOrContainerMenuItem" class="eModal-2" href="javascript: void(0);">Shop by Cart or Container</a></li>');         
+        }
+ 
  <?php
  
     $temp_cookie = ($_COOKIE['cart_or_container']);
     //echo '$temp_cookie is '.$temp_cookie;
         $cartcontainerstring = 'container or cart';
+        
+        //echo '$cartcontainerstring is '.$cartcontainerstring;
         if (isset($temp_cookie) && ($temp_cookie == "container")){        
             $cartcontainerstring = 'container';
 ?>
@@ -278,6 +288,7 @@ jQuery(document).ready(function() {
                    jQuery('.woocommerce-message:contains("Cart updated.")').html('<?php echo ucwords($cartcontainerstring); ?> updated.');
                }
            }, 25);           
+           
 <?php        
         }
         else{        
@@ -308,12 +319,13 @@ jQuery(document).ready(function() {
                    clearInterval(o);
                    jQuery('.woocommerce-price-and-add button.single_add_to_cart_button:contains("Add to Container")').html('Add to <?php echo ucwords($cartcontainerstring); ?>.');
                }
-           }, 25);               
+           }, 25);                                     
+           
 <?php                    
         } 
  ?>
 
- 
+            
 });
 
 
