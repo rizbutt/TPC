@@ -1623,25 +1623,22 @@ add_action( 'init', 'woocommerce_dimension_filter_init' );
  * @return array
  */
 function woocommerce_dimension_filter_init($filtered_posts) {
-    //go through all filtered posts and check dimensions for each
-    /*
-
-     */
+    global $wpdb;
     
-$comparisonString = array(
-    'nolargerthan' => '<',
-    'nosmallerthan' => '>',
-    'exactly' => '='    
-);
+    $comparisonString = array(
+        'nolargerthan' => '<',
+        'nosmallerthan' => '>',
+        'exactly' => '='    
+    );
     
     
-    $tmp_filtered_posts = array(); 
     if( isset($_GET['length']) && is_numeric($_GET['length']) 
             && isset($_GET['depth']) && is_numeric($_GET['depth']) 
             && isset($_GET['height']) && is_numeric($_GET['height']) 
             && isset($_GET['pre_length']) && trim($_GET['pre_length']) != ''
             && isset($_GET['pre_depth']) && trim($_GET['pre_depth']) != '' 
             && isset($_GET['pre_height']) && trim($_GET['pre_height']) != ''  ){
+                
         
         $length = intval( $_GET['length'] );
         $depth = intval( $_GET['depth'] );
@@ -1654,59 +1651,33 @@ $comparisonString = array(
         $matched_products = array();
         
         $matched_products_query = $wpdb->get_results( $wpdb->prepare("
-        	SELECT DISTINCT ID, post_parent, post_type 
-                        FROM $wpdb->posts			
-			WHERE post_type IN ( 'product', 'product_variation' ) 
-                        AND post_status = 'publish' 
-                        AND ID IN (
-                            SELECT DISTINCT ID
-                            FROM $wpdb->posts
-                            INNER JOIN $wpdb->postmeta ON ID = post_id
-                            WHERE meta_key = %s 
-                            AND meta_value %s %s                        
-                        )
-                        AND ID IN (
-                            SELECT DISTINCT ID
-                            FROM $wpdb->posts
-                            INNER JOIN $wpdb->postmeta ON ID = post_id
-                            WHERE meta_key = %s 
-                            AND meta_value %s %s                        
-                        )
-                        AND ID IN (
-                            SELECT DISTINCT ID
-                            FROM $wpdb->posts
-                            INNER JOIN $wpdb->postmeta ON ID = post_id
-                            WHERE meta_key = %s 
-                            AND meta_value %s %s                        
-                        )                        
+        	SELECT DISTINCT ID, post_parent, post_type                
+                FROM qq1_posts
+                WHERE ID IN (
+                        SELECT ID
+                        FROM qq1_posts
+                        INNER JOIN qq1_postmeta ON ID = post_id
+                        WHERE meta_key = %s
+                        AND meta_value %s %s
+                    )
+                AND ID IN (
+                        SELECT ID
+                        FROM qq1_posts
+                        INNER JOIN qq1_postmeta ON ID = post_id
+                        WHERE meta_key = %s
+                        AND meta_value %s %s
+                    )   
+                AND ID IN (
+                        SELECT ID
+                        FROM qq1_posts
+                        INNER JOIN qq1_postmeta ON ID = post_id
+                        WHERE meta_key = %s
+                        AND meta_value %s %s
+                    )                           
                     
-		", '_length', $comparisonString[$pre_length], $length, 
-                '_width', $comparisonString[$pre_depth], $depth, 
-                '_height', $comparisonString[$pre_height], $height  ), OBJECT_K );
-
-        /*
-        $args = array(
-           'post_type' => 'product',                                 
-           'post_status' => 'publish',                                 
-           'meta_query' => array(
-               array(
-                   'key' => '_length',
-                   'value' => $length,
-                   'compare' => $comparisonString[$pre_length],
-               ),
-               array(
-                   'key' => '_width',
-                   'value' => $depth,
-                   'compare' => $comparisonString[$pre_depth],
-               ),
-               array(
-                   'key' => '_height',
-                   'value' => $height,
-                   'compare' => $comparisonString[$pre_height],
-               )                 
-           )
-         );
-         $matched_products_query = new WP_Query($args);     */   
+		", 'Product Length', $comparisonString[$pre_length], $length, 
+                'Product Width', $comparisonString[$pre_depth], $depth, 
+                'Product Height', $comparisonString[$pre_height], $height  ), OBJECT_K );
         
         if ( $matched_products_query ) {
             foreach ( $matched_products_query as $product ) {
