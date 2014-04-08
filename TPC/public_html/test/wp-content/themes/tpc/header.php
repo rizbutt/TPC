@@ -87,8 +87,13 @@ var newQuery = '';
 
 
 
-function getNewQuery(paramToExclude1, paramToExclude2){
+function getNewQuery(paramToExclude1, paramToExclude2, paramToExclude3, paramToExclude4, paramToExclude5, paramToExclude6){
     paramToExclude2 = typeof paramToExclude2 !== 'undefined' ? paramToExclude2 : '';
+    paramToExclude3 = typeof paramToExclude3 !== 'undefined' ? paramToExclude3 : '';
+    paramToExclude4 = typeof paramToExclude4 !== 'undefined' ? paramToExclude4 : '';
+    paramToExclude5 = typeof paramToExclude5 !== 'undefined' ? paramToExclude5 : '';
+    paramToExclude6 = typeof paramToExclude6 !== 'undefined' ? paramToExclude6 : '';
+    
     var match,
         pl     = /\+/g,  // Regex for replacing addition symbol with a space
         search = /([^&=]+)=?([^&]*)/g,
@@ -124,6 +129,21 @@ function getNewQuery(paramToExclude1, paramToExclude2){
     
     }
        
+}
+
+
+function submitDimensionSearch(){
+    getNewQuery('length', 'pre_length', 'depth', 'pre_depth', 'height', 'pre_height' );
+    
+    
+    if ( jQuery('#length').val() !== "" && jQuery('#depth').val() !== "" && jQuery('#height').val() !== "" ) {
+        location.href = '?filtering=1&length='+jQuery('#length').val()+'&pre_length='+jQuery('#pre_length').val()+'&depth='+jQuery('#depth').val()+'&pre_depth='+jQuery('#pre_depth').val()+'&height='+jQuery('#height').val()+'&pre_height='+jQuery('#pre_height').val()+'&'+newQuery;
+    }
+    else{
+        location.href = '?'+newQuery;
+    }    
+    
+    //cancelDimensionSearch();
 }
 
 jQuery(document).ready(function() {
