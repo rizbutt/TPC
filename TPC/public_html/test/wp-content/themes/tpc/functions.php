@@ -193,7 +193,7 @@ header('Accept-Ranges: bytes');
 $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Nick Meisher');
+$pdf->SetAuthor('The Pangaea Collection');
 $pdf->SetTitle('Title Stats');
 $pdf->SetSubject('Subject Stats');
 //$pdf->SetKeywords('TCPDF, PDF, example, test, guide');
@@ -232,9 +232,10 @@ if (@file_exists(dirname(__FILE__).'/tcpdf/lang/eng.php')) {
 }
 
 // ---------------------------------------------------------
+//$fontname = $pdf->addTTFfont('http://themes.googleusercontent.com/static/fonts/habibi/v3/tN_wdomvOBEGSfusT6BAOA.woff', 'TrueTypeUnicode', '', 32);
 
 // set font
-$pdf->SetFont('dejavusans', '', 11);
+$pdf->SetFont('Helvetica', '', 11);
 
 // add a page
 $pdf->AddPage();
@@ -243,68 +244,76 @@ $pdf->AddPage();
 // writeHTMLCell($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=0, $reseth=true, $align='', $autopadding=true)
 
 // create some HTML content
-$html = '<table width="650" height="77" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr>
-    <td valign="top" width="650" height="63" align="left"><img  width="440" height="63" src="/wp-content/uploads/2013/12/logo-pangaeaecollection.png" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unit Price: $'.$the_pricez.'.00</td>
-   
-  </tr>
-    <tr>
-    <td width="440" height="63" align="left"></td>
-    <td valign="top" height="63"></td>
-  </tr></table>';
-if ($show_logo_price) $html = "";
-$html .= '<table width="650" border="0" align="center" cellpadding="0" cellspacing="0" id="table-pdf">
-<tr>
-	<td height="10">&nbsp;
-		
-	</td>
-</tr>
-<tr>
-	<td align="center">
-		<h2>'.get_the_title($pstID).'</h2>
-	</td>
-</tr>
-<tr>
-	<td height="5">&nbsp;
-		
-	</td>
-</tr>
-<tr>
-	<td>
-		<img src="'. wp_get_attachment_url( get_post_thumbnail_id($pstID)).'"/>
-	</td>
-</tr>
-<tr>
-	<td height="5">&nbsp;
-		
-	</td>
-</tr>
-</table>
-<table width="650" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr height="30">
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>'. $excerptz .'</td>
-  </tr>
-</table>
-<table width="650" border="0" align="center" cellpadding="0" cellspacing="0">
-    <tr>
-    <td colspan="3" height="30"></td>
-  </tr>
-  <tr>
-    <td colspan="3" height="10"><hr /></td>
-  </tr>
-  <tr>
-    <td height="35" width="217">Length: '.$the_length.'" </td>
-    <td height="35" width="217">Width: '.$the_width.'" </td>
-    <td height="35" width="217">Height: '.$the_height.'" </td>
-  </tr>
-  <tr>
-    <td colspan="3" height="10"><hr /></td>
-  </tr>
-</table>
-';
+      $html = '
+      <table width="650" border="0" align="center" cellpadding="0" cellspacing="0" id="table-pdf">
+         <tr>
+            <td width="150"></td>
+            <td height="50">&nbsp; </td>
+            <td width="150"></td>
+         </tr>
+         <tr>
+            <td width="150"></td>
+            <td width="350" align="center"><h1>'.get_the_title($pstID).'</h1></td>
+            <td width="150"></td>
+         </tr>
+         <tr>
+            <td colspan="3" height="5">&nbsp; </td>
+         </tr>
+         <tr>
+            <td width="150"></td>
+            <td width="350" ><img src="'. wp_get_attachment_url( get_post_thumbnail_id($pstID)).'"/></td>
+            <td width="150"></td>
+         </tr>
+         <tr>
+            <td colspan="3" height="5">&nbsp; </td>
+         </tr>
+      </table>
+      <table width="650" border="0" align="center" cellpadding="0" cellspacing="0">
+         <tr height="30">
+            <td>&nbsp;</td>
+         </tr>
+         <tr>
+            <td width="150"></td>
+            <td width="350" >'. $excerptz .'</td>
+            <td width="150"></td>
+         </tr>
+      </table>
+      <table width="650" border="0" align="center" cellpadding="0" cellspacing="0">
+         <tr  height="1">
+            <td width="150"></td>
+            <td width="350" colspan="3">
+            <hr color="grey" size="5" />
+            </td>
+            <td width="150"></td>
+         </tr>
+         <tr>
+            <td width="150"></td>
+            <td width="116">Length: '.$the_length.'" </td>
+            <td width="116">Width: '.$the_width.'" </td>
+            <td width="116">Height: '.$the_height.'" </td>
+            <td width="150"></td>
+         </tr>
+         <tr  height="1">
+            <td width="150"></td>
+            <td width="350" colspan="3">
+            <hr color="grey" size="5" />
+            </td>
+            <td width="150"></td>
+         </tr>
+         <tr>
+            <td colspan="5" height="325"></td>
+         </tr>
+      </table>
+      ';
+      if (!$show_logo_price){
+      $html .= '
+      <table width="650" height="50" border="0" align="center" cellpadding="0" cellspacing="0">
+         <tr>
+            <td valign="top" width="650" align="left"><img  width="250" src="/wp-content/uploads/2013/12/logo-pangaeaecollection.png" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price $'.$the_pricez.'.00</td>
+         </tr>
+      </table>';
+      }
+            
 
 // output the HTML content
 $pdf->writeHTML($html, true, false, true, false, '');
