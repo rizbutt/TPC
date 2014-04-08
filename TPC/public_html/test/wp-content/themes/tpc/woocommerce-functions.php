@@ -1611,7 +1611,7 @@ function woocommerce_price_filter($filtered_posts) {
 
 
 
-//add_action( 'init', 'woocommerce_dimension_filter_init' );
+add_action( 'init', 'woocommerce_dimension_filter_init' );
 
 
 /**
@@ -1621,14 +1621,19 @@ function woocommerce_price_filter($filtered_posts) {
  * @access public
  * @param array $filtered_posts
  * @return array
- * /
+ */
 function woocommerce_dimension_filter_init($filtered_posts) {
     //go through all filtered posts and check dimensions for each
     /*
-nolargerthan
-nosmallerthan
-exactly
-     * /
+
+     */
+    
+$comparisonString = array(
+    'nolargerthan' => '<',
+    'nosmallerthan' => '>',
+    'exactly' => '='    
+);
+    
     
     $tmp_filtered_posts = array(); 
     if( isset($_GET['length']) && is_numeric($_GET['length']) 
@@ -1647,108 +1652,66 @@ exactly
         $pre_height = sanitize_text_field( $_GET['pre_height'] );
         
         $matched_products = array();
+        
         $matched_products_query = $wpdb->get_results( $wpdb->prepare("
-        	SELECT DISTINCT ID, post_parent, post_type, meta_value
-                        FROM $wpdb->posts
-			INNER JOIN $wpdb->postmeta ON ID = post_id
+        	SELECT DISTINCT ID, post_parent, post_type 
+                        FROM $wpdb->posts			
 			WHERE post_type IN ( 'product', 'product_variation' ) 
                         AND post_status = 'publish' 
-                        AND meta_key = %s
-		", '_product_attributes' ), OBJECT_K );
+                        AND ID IN (
+                            SELECT DISTINCT ID
+                            FROM $wpdb->posts
+                            INNER JOIN $wpdb->postmeta ON ID = post_id
+                            WHERE meta_key = %s 
+                            AND meta_value %s %s                        
+                        )
+                        AND ID IN (
+                            SELECT DISTINCT ID
+                            FROM $wpdb->posts
+                            INNER JOIN $wpdb->postmeta ON ID = post_id
+                            WHERE meta_key = %s 
+                            AND meta_value %s %s                        
+                        )
+                        AND ID IN (
+                            SELECT DISTINCT ID
+                            FROM $wpdb->posts
+                            INNER JOIN $wpdb->postmeta ON ID = post_id
+                            WHERE meta_key = %s 
+                            AND meta_value %s %s                        
+                        )                        
+                    
+		", '_length', $comparisonString[$pre_length], $length, 
+                '_width', $comparisonString[$pre_depth], $depth, 
+                '_height', $comparisonString[$pre_height], $height  ), OBJECT_K );
 
+        /*
+        $args = array(
+           'post_type' => 'product',                                 
+           'post_status' => 'publish',                                 
+           'meta_query' => array(
+               array(
+                   'key' => '_length',
+                   'value' => $length,
+                   'compare' => $comparisonString[$pre_length],
+               ),
+               array(
+                   'key' => '_width',
+                   'value' => $depth,
+                   'compare' => $comparisonString[$pre_depth],
+               ),
+               array(
+                   'key' => '_height',
+                   'value' => $height,
+                   'compare' => $comparisonString[$pre_height],
+               )                 
+           )
+         );
+         $matched_products_query = new WP_Query($args);     */   
+        
         if ( $matched_products_query ) {
             foreach ( $matched_products_query as $product ) {
-                if ( $product->post_type == 'product' ){
-                    
-                    /*
-                    $productAttr = unserialize($product->meta_value);
-                    
-                    $postMatched = true;
-                    switch( $pre_length ){
-                        case 'nolargerthan':
-                            if( $productAttr['pa_product-length']['value'] < $length ){
-                                $postMatched = true;
-                            }
-                            else{
-                                $postMatched = false;
-                            }
-                            break;
-                        case 'nosmallerthan':
-                            if( $productAttr['pa_product-length']['value'] > $length ){
-                                $postMatched = true;
-                            }
-                            else{
-                                $postMatched = false;
-                            }
-                            break;    
-                        case 'exactly':
-                            if( $productAttr['pa_product-length']['value'] == $length ){
-                                $postMatched = true;
-                            }
-                            else{
-                                $postMatched = false;
-                            }
-                            break;                        
-                    }
-
-
-                    switch( $pre_depth ){
-                        case 'nolargerthan':
-                            if( $productAttr['pa_product-width']['value'] < $depth ){
-                                $postMatched = true;
-                            }
-                            else{
-                                $postMatched = false;
-                            }
-                            break;
-                        case 'nosmallerthan':
-                            if( $productAttr['pa_product-width']['value'] > $depth ){
-                                $postMatched = true;
-                            }
-                            else{
-                                $postMatched = false;
-                            }
-                            break;    
-                        case 'exactly':
-                            if( $productAttr['pa_product-width']['value'] == $depth ){
-                                $postMatched = true;
-                            }
-                            else{
-                                $postMatched = false;
-                            }
-                            break;                        
-                    }
-
-                    switch( $pre_height ){
-                        case 'nolargerthan':
-                            if( $productAttr['pa_product-height']['value'] < $height ){
-                                $postMatched = true;
-                            }
-                            else{
-                                $postMatched = false;
-                            }
-                            break;
-                        case 'nosmallerthan':
-                            if( $productAttr['pa_product-height']['value'] > $height ){
-                                $postMatched = true;
-                            }
-                            else{
-                                $postMatched = false;
-                            }
-                            break;    
-                        case 'exactly':
-                            if( $productAttr['pa_product-height']['value'] == $height ){
-                                $postMatched = true;
-                            }
-                            else{
-                                $postMatched = false;
-                            }
-                            break;                        
-                    }                             
-                    * /
-                    if( $product->ID == 3326 ){
-                        $matched_products[] = $product->ID;
-                    }
+                if ( $product->post_type == 'product' ){                                        
+                        $matched_products[] = $product->ID;                    
                 }
                     
                 if ( $product->post_parent > 0 && ! in_array( $product->post_parent, $matched_products ) ){
@@ -1771,7 +1734,7 @@ exactly
     
     return (array) $filtered_posts;
 }
-*/
+
 
 /**
  * Save the password and redirect back to the my account page.
