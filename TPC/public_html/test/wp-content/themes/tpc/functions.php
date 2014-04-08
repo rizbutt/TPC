@@ -177,9 +177,40 @@ function PDFPrinterz()
         $show_logo_price = isset($_GET['show_logo_price']) ? 1 : 0;
         $product = get_product( $pstID );
         $the_pricez =  $product->get_price(); 
-        $the_width = get_post_meta($pstID, "_width", true); 
-        $the_length = get_post_meta($pstID, "_length", true); 
-        $the_height = get_post_meta($pstID, '_height', true);
+        $productAttr = $product->get_attributes();
+        
+        if( get_post_meta($pstID, "_width", true) != '' ){
+            $the_width = get_post_meta($pstID, "_width", true); 
+        }
+        elseif( get_post_meta($pstID, "Product Width", true) != '' ){
+            $the_width = get_post_meta($pstID, "Product Width", true); 
+        }
+        else{
+            $the_width = $productAttr['pa_product-width']['value'];
+        }
+        
+        if( get_post_meta($pstID, "_length", true) != '' ){
+            $the_length = get_post_meta($pstID, "_length", true); 
+        }
+        elseif( get_post_meta($pstID, "Product Length", true) != '' ){
+            $the_length = get_post_meta($pstID, "Product Length", true); 
+        }
+        else{
+            $the_length = $productAttr['pa_product-length']['value'];
+        }   
+        
+        
+        if( get_post_meta($pstID, "_height", true) != '' ){
+            $the_height = get_post_meta($pstID, "_height", true); 
+        }
+        elseif( get_post_meta($pstID, "Product Height", true) != '' ){
+            $the_height = get_post_meta($pstID, "Product Height", true); 
+        }
+        else{
+            $the_height = $productAttr['pa_product-length']['value'];
+        }         
+        
+        
         $pstID = (int)$pstID;
         $excerptz = iweb_get_excerpt_by_id($pstID);
 
@@ -243,6 +274,23 @@ $pdf->AddPage();
 // writeHTML($html, $ln=true, $fill=false, $reseth=false, $cell=false, $align='')
 // writeHTMLCell($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=0, $reseth=true, $align='', $autopadding=true)
 
+$imageUrl = wp_get_attachment_url( get_post_thumbnail_id($pstID));
+list($imageWidth, $imageHeight, $imageType, $imageAttr) = getimagesize( $imageUrl );
+
+$widthAttr = '';
+$heightAttr = '';
+$spacerHeight = '';
+if( intval($imageHeight) > 650 ){
+    $heightAttr = ' height="350" ';       
+    $spacerHeight = '  height="'.( 1230 - (intval($imageHeight)) ).'"  ';
+}
+else{
+    $heightAttr = ' height="350" ';     
+    $spacerHeight = '  height="'.( 1000 - (intval($imageHeight)) ).'"  ';
+}
+
+
+
 // create some HTML content
       $html = '
       <table width="650" border="0" align="center" cellpadding="0" cellspacing="0" id="table-pdf">
@@ -261,7 +309,7 @@ $pdf->AddPage();
          </tr>
          <tr>
             <td width="150"></td>
-            <td width="350" ><img src="'. wp_get_attachment_url( get_post_thumbnail_id($pstID)).'"/></td>
+            <td width="350" ><img '.$heightAttr.' src="'. wp_get_attachment_url( get_post_thumbnail_id($pstID)).'"/></td>
             <td width="150"></td>
          </tr>
          <tr>
@@ -293,15 +341,15 @@ $pdf->AddPage();
             <td width="116">Height: '.$the_height.'" </td>
             <td width="150"></td>
          </tr>
-         <tr  height="1">
+         <tr style="margin: 0; padding: 0;">
             <td width="150"></td>
-            <td width="350" colspan="3">
+            <td style="margin: 0; padding: 0;" width="350" colspan="3">
             <hr color="grey" size="5" />
             </td>
             <td width="150"></td>
          </tr>
          <tr>
-            <td colspan="5" height="325"></td>
+            <td colspan="5" '.$spacerHeight.'></td>
          </tr>
       </table>
       ';
@@ -309,7 +357,7 @@ $pdf->AddPage();
       $html .= '
       <table width="650" height="50" border="0" align="center" cellpadding="0" cellspacing="0">
          <tr>
-            <td valign="top" width="650" align="left"><img  width="250" src="/wp-content/uploads/2013/12/logo-pangaeaecollection.png" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price $'.$the_pricez.'.00</td>
+            <td valign="top" width="650" align="left"><img  width="250" src="/wp-content/uploads/2013/12/logo-pangaeaecollection.png" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price $'.$the_pricez.'.00</td>
          </tr>
       </table>';
       }
