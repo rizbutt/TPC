@@ -267,14 +267,10 @@ jQuery(document).ready(function() {
  if( jQuery('a[href="http://test.thepangaeacollection.com/wishlist/"]').length > 0 ){
      jQuery('a[href="http://test.thepangaeacollection.com/wishlist/"]').hide();
  }
- /*
- if( jQuery('a[href="http://test.thepangaeacollection.com/cart/"]').html() == 'View Cart →') {
-     jQuery('a[href="http://test.thepangaeacollection.com/cart/"]').html('View Container →');
- }
- */
- 
           
-         
+if( jQuery('#text-8').length > 0 ){
+    jQuery('#text-8').hide();
+}
 
                 //add link on menu
         if( jQuery('#cartOrContainerMenuItem').length <= 0 ){
