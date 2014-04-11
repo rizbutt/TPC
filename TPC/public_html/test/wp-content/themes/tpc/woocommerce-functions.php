@@ -1610,8 +1610,16 @@ function woocommerce_price_filter($filtered_posts) {
 
 
 
+function woocommerce_dimension_filter_init() {
+    global $woocommerce;
+    add_filter( 'loop_shop_post_in', 'woocommerce_dimension_filter' );
+	
+}
 
 add_action( 'init', 'woocommerce_dimension_filter_init' );
+
+
+
 
 
 /**
@@ -1622,7 +1630,7 @@ add_action( 'init', 'woocommerce_dimension_filter_init' );
  * @param array $filtered_posts
  * @return array
  */
-function woocommerce_dimension_filter_init($filtered_posts) {
+function woocommerce_dimension_filter($filtered_posts) {
     global $wpdb;
     
     $comparisonString = array(
@@ -1657,27 +1665,27 @@ function woocommerce_dimension_filter_init($filtered_posts) {
                         SELECT ID
                         FROM qq1_posts
                         INNER JOIN qq1_postmeta ON ID = post_id
-                        WHERE meta_key = %s
-                        AND meta_value %s %s
+                        WHERE meta_key = '%s'
+                        AND meta_value ".$comparisonString[$pre_length]." '%s'
                     )
                 AND ID IN (
                         SELECT ID
                         FROM qq1_posts
                         INNER JOIN qq1_postmeta ON ID = post_id
-                        WHERE meta_key = %s
-                        AND meta_value %s %s
+                        WHERE meta_key = '%s'
+                        AND meta_value ".$comparisonString[$pre_depth]." '%s'
                     )   
                 AND ID IN (
                         SELECT ID
                         FROM qq1_posts
                         INNER JOIN qq1_postmeta ON ID = post_id
-                        WHERE meta_key = %s
-                        AND meta_value %s %s
+                        WHERE meta_key = '%s'
+                        AND meta_value ".$comparisonString[$pre_height]." '%s'
                     )                           
                     
-		", 'Product Length', $comparisonString[$pre_length], $length, 
-                'Product Width', $comparisonString[$pre_depth], $depth, 
-                'Product Height', $comparisonString[$pre_height], $height  ), OBJECT_K );
+		", 'Product Length', $length, 
+                'Product Width', $depth, 
+                'Product Height', $height  ), OBJECT_K );
         
         if ( $matched_products_query ) {
             foreach ( $matched_products_query as $product ) {
@@ -1699,7 +1707,8 @@ function woocommerce_dimension_filter_init($filtered_posts) {
         } else {
             $filtered_posts = array_intersect( $filtered_posts, $matched_products );
             $filtered_posts[] = 0;
-        }        
+        }   
+        
         
     }
     
